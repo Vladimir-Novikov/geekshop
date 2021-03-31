@@ -33,11 +33,11 @@ def basket_add(request, pk):
         basket.quantity += 1
     else:
         basket.quantity = F("quantity") + 1
-    
+
     basket.save()
 
-    update_queries = list(filter(lambda x: 'UPDATE' in x['sql'], connection.queries))
-    #print(f'query basket_add: {update_queries}')
+    update_queries = list(filter(lambda x: "UPDATE" in x["sql"], connection.queries))
+    # print(f'query basket_add: {update_queries}')
 
     return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 

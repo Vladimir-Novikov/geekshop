@@ -1,15 +1,13 @@
 from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
-                              redirect, render)
+from django.shortcuts import HttpResponseRedirect, get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from adminapp.forms import (ProductCategoryEditForm, ProductEditForm,
-                            ShopUserAdminEditForm)
+from adminapp.forms import ProductCategoryEditForm, ProductEditForm, ShopUserAdminEditForm
 from authnapp.forms import ShopUserRegisterForm
 from authnapp.models import ShopUser
 from mainapp.models import Product, ProductCategory
@@ -92,6 +90,7 @@ class ProductCategoryCreateView(LoginRequiredMixin, CreateView):
     template_name = "adminapp/category_update.html"
     success_url = reverse_lazy("admin:categories")
     fields = "__all__"
+
 
 from django.db.models import F
 
@@ -197,6 +196,7 @@ def product_delete(request, pk):
     content = {"title": title, "product_to_delete": product, "media_url": settings.MEDIA_URL}
     return render(request, "adminapp/product_delete.html", content)
 
+
 from django.db import connection
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -216,4 +216,4 @@ def product_is_active_update_productcategory_save(sender, instance, **kwargs):
         else:
             instance.product_set.update(is_active=False)
 
-        #db_profile_by_type(sender, 'UPDATE', connection.queries)
+        # db_profile_by_type(sender, 'UPDATE', connection.queries)
