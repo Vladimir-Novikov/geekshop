@@ -75,7 +75,7 @@ $(document).ready(function () {
         deleteCssClass: 'btn btn-outline-warning',
         prefix: 'orderitems',
         added: setDefaultValue,
-        removed: itemDelete
-        //hideLastAddForm: true
+        removed: itemDelete,
+        hideLastAddForm: false,
     });
 });
